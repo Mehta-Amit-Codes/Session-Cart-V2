@@ -7,23 +7,30 @@
                 <span class="badge">{{this.qty}}</span>
                 <strong>{{this.item.title}}</strong>
                 <span class="lable lable-success">${{this.price}}</span>
-                              
+
                 <div class="btn-group">
                     <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Action <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="/reduce/{{this.item.id}}">Reduce by 1</a></li>
-                        <li><a href="#">Remove All</a></li>
+                        <li>
+                            <a href="#"
+                               hx-post="/reduce/{{this.item.id}}"
+                               hx-target="#cart-container"
+                               hx-swap="outerHTML">Reduce by 1</a>
+                        </li>
                     </ul>
                 </div>
             </li>
             {{/each}}
-            
+
         </ul>
     </div>
 </div>
 <div class="row">
     <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
         <strong>Total: {{totalPrice}}</strong>
+        <form action="/remove-all-from-cart" method="post" style="display:inline; float:right;">
+            <button type="submit" class="btn btn-danger btn-sm">Remove All</button>
+        </form>
     </div>
 </div>
 <hr>
@@ -39,5 +46,3 @@
     </div>
 </div>
 {{/if}}
-
-

@@ -9,13 +9,14 @@
     <div class="clearfix">
         <div class="price pull-left">
         {{ this.price }}$
-        <a href="/add-to-cart/{{this.id}}" class="btn btn-success pull-right">Add to Cart</a>
+        <button class="btn btn-success pull-right"
+                hx-post="/add-to-cart/{{this.id}}"
+                hx-target="#cart-badge"
+                hx-swap="outerHTML">Add to Cart</button>
         </div>
-    
     </div>
   </div>
 </div>
   {{/each}}
 </div>
-
 {{/each}}

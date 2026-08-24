@@ -57,7 +57,35 @@ app.set('views', path.join(__dirname, 'views'));
 // --- Security & core middleware ---
 app.use(
   helmet({
-    contentSecurityPolicy: false, // relax CSP because views load Bootstrap/jQuery/Font Awesome from CDNs
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: [
+          "'self'",
+          'https://unpkg.com',
+          'https://cdnjs.cloudflare.com',
+          'https://code.jquery.com',
+          'https://stackpath.bootstrapcdn.com',
+          "'unsafe-inline'",
+        ],
+        styleSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          'https://cdnjs.cloudflare.com',
+          'https://stackpath.bootstrapcdn.com',
+          'https://use.fontawesome.com',
+        ],
+        fontSrc: [
+          "'self'",
+          'https:',
+          'data:',
+          'https://use.fontawesome.com',
+          'https://cdnjs.cloudflare.com',
+        ],
+        imgSrc: ["'self'", 'data:', 'https:'],
+        connectSrc: ["'self'"],
+      },
+    },
   })
 );
 app.use(pinoHttp({ logger }));

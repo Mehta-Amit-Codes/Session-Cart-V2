@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const { doubleCsrfProtection, generateToken } = require('../config/csrf');
+const Order = require('../models/order');
 const router = express.Router();
 
 router.use(doubleCsrfProtection);
@@ -19,11 +20,17 @@ function notLoggedIn(req, res, next) {
   return res.redirect('/');
 }
 
-router.get('/profile', isLoggedIn, (req, res) => {
-  res.render('user/profile', { user: req.user.toObject() });
+router.get('/profile', isLoggedIn, async (req, res, next) => {
+  try {
+    const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 }).lean();
+    res.render('user/profile', { user: req.user.toObject(), orders });
+  } catch (err) {
+    next(err);
+  }
 });
 
-router.get('/logout', isLoggedIn, (req, res, next) => {
+// State-changing: now POST instead of GET
+router.post('/logout', isLoggedIn, (req, res, next) => {
   req.logOut((err) => {
     if (err) {
       return next(err);

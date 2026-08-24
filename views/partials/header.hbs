@@ -11,7 +11,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/shopping-cart">
-          <i class="fas fa-shopping-cart"></i> Shopping Cart<div class="badge">({{session.cart.totalQty}})</div></a>
+          <i class="fas fa-shopping-cart"></i> Shopping Cart<div class="badge" id="cart-badge">({{session.cart.totalQty}})</div></a>
           
       </li>
       <li class="nav-item dropdown">
@@ -23,7 +23,9 @@
             <a class="dropdown-item" href="/user/profile"><i class="fas fa-user"></i> User Account</a>
           
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/user/logout">Logout</a>
+          <form action="/user/logout" method="post" style="display:inline">
+            <button type="submit" class="dropdown-item btn btn-link" style="border:none;text-align:left;width:100%;">Logout</button>
+          </form>
           {{else}}
           <a class="dropdown-item" href="/user/signup"><i class="fas fa-user"></i> Sign Up</a>
           <a class="dropdown-item" href="/user/signin">Sign In</a>

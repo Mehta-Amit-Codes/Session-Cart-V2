@@ -1,5 +1,7 @@
 # Session Cart
 
+[![Diagram](https://img.shields.io/badge/gitdiagram-view%20architecture-blue)](https://gitdiagram.com/mehta-amit-codes/session-cart-v2)
+
 A server-rendered shopping cart application built with **Node.js, Express, MongoDB, Mongoose, Passport.js, and Handlebars**.
 
 The application provides product browsing, session-based cart management, user registration/login, protected checkout, CSRF protection, security middleware, rate limiting, structured logging, and persistent sessions stored in MongoDB.
